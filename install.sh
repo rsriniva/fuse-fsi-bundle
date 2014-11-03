@@ -8,6 +8,10 @@ if [ "x$JAVA_HOME" = "x" ]; then
   exit 1
 fi
 
+if [ ! -f code.zip ]; then
+  zip -r code.zip code
+fi
+
 if [ ! -f installation.zip ]; then
   cd installation_build
   zip -r ../installation.zip installation

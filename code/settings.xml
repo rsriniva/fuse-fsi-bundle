@@ -1,0 +1,9 @@
+<settings>
+  <servers>
+    <server>
+      <id>fabric8.upload.repo</id>
+      <username>admin</username>
+      <password>admin</password>
+    </server>
+  </servers>
+</settings>

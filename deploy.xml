@@ -66,6 +66,8 @@
       </rhq:archive>
       <rhq:archive name="installation.zip">
       </rhq:archive>
+      <rhq:archive name="code.zip">
+      </rhq:archive>
     </rhq:deployment-unit>
 
   </rhq:bundle>
@@ -94,6 +96,11 @@
   <target name="install_fuse">
     <property name="postinstallTargetExecuted" value="true"/>
 
+    <copy file="${rhq.deploy.dir}/installation/config/fuse/users.properties"
+      tofile="${rhq.deploy.dir}/jboss-fuse-6.1.0.redhat-379/etc/users.properties"
+      overwrite="true" />
+
+    <!-- Setting our executables to be executable -->
     <if>
       <equals arg1="${isOnLinux}" arg2="true" />
       <then>
@@ -113,6 +120,26 @@
         <exec dir="${rhq.deploy.dir}/jboss-fuse-6.1.0.redhat-379/bin" executable="/bin/chmod">
           <arg value="775"/>
           <arg value="status"/>
+        </exec>
+        <exec dir="${rhq.deploy.dir}/jboss-fuse-6.1.0.redhat-379/bin" executable="/bin/chmod">
+          <arg value="775"/>
+          <arg value="karaf"/>
+        </exec>
+        <exec dir="${rhq.deploy.dir}/jboss-fuse-6.1.0.redhat-379/bin" executable="/bin/chmod">
+          <arg value="775"/>
+          <arg value="client"/>
+        </exec>
+        <exec dir="${rhq.deploy.dir}/jboss-fuse-6.1.0.redhat-379/bin" executable="/bin/chmod">
+          <arg value="775"/>
+          <arg value="setenv"/>
+        </exec>
+        <exec dir="${rhq.deploy.dir}/jboss-fuse-6.1.0.redhat-379/bin" executable="/bin/chmod">
+          <arg value="775"/>
+          <arg value="patch"/>
+        </exec>
+        <exec dir="${rhq.deploy.dir}/jboss-fuse-6.1.0.redhat-379/bin" executable="/bin/chmod">
+          <arg value="775"/>
+          <arg value="admin"/>
         </exec>
         <exec dir="${rhq.deploy.dir}/db-derby-10.10.2.0-bin/bin" executable="/bin/chmod">
           <arg value="775"/>
@@ -153,6 +180,28 @@
       autocommit="true"
       src="${rhq.deploy.dir}/installation/sql/tables.sql">
     </sql>
+
+    <exec dir="${rhq.deploy.dir}/jboss-fuse-6.1.0.redhat-379/bin" executable="./start">
+    </exec>
+
+    <echo message="Waiting for Fuse to start..."/>
+    <sleep minutes="1" />
+    <echo message="Still waiting..."/>
+    <sleep minutes="1" />
+
+    <exec dir="${rhq.deploy.dir}/jboss-fuse-6.1.0.redhat-379/bin" executable="./client">
+      <arg value="-u"/>
+      <arg value="admin"/>
+      <arg value="-p"/>
+      <arg value="admin"/>
+      <arg value="fabric:create --clean --wait-for-provisioning"/>
+    </exec>
+
+    <exec dir="${rhq.deploy.dir}/code/jboss-fuse-fsi-demo" executable="mvn">
+      <arg value="-gs"/>
+      <arg value="${rhq.deploy.dir}/code/settings.xml"/>
+      <arg value="fabric8:deploy"/>
+    </exec>
 
   </target>
 
