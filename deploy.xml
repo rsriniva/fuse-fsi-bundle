@@ -62,6 +62,10 @@
     <rhq:deployment-unit name="Fuse 6.1" manageRootDir="false" preinstallTarget="chk_platform" postinstallTarget="install_fuse">
       <rhq:archive name="software/jboss-fuse-full-6.1.0.redhat-379.zip">
       </rhq:archive>
+      <rhq:archive name="software/db-derby-10.10.2.0-bin.zip">
+      </rhq:archive>
+      <rhq:archive name="installation.zip">
+      </rhq:archive>
     </rhq:deployment-unit>
 
   </rhq:bundle>
@@ -110,8 +114,47 @@
           <arg value="775"/>
           <arg value="status"/>
         </exec>
+        <exec dir="${rhq.deploy.dir}/db-derby-10.10.2.0-bin/bin" executable="/bin/chmod">
+          <arg value="775"/>
+          <arg value="startNetworkServer"/>
+        </exec>
+        <exec dir="${rhq.deploy.dir}/db-derby-10.10.2.0-bin/bin" executable="/bin/chmod">
+          <arg value="775"/>
+          <arg value="stopNetworkServer"/>
+        </exec>
       </then>
     </if>
+
+    <!-- Start up Derby database -->
+    <exec dir="${rhq.deploy.dir}/db-derby-10.10.2.0-bin/bin" executable="./startNetworkServer" spawn="true">
+      <arg value="-h"/>
+      <arg value="localhost"/>
+      <arg value="-p"/>
+      <arg value="1527"/>
+    </exec>
+
+    <!-- Need to wait for the db to start -->
+    <sleep seconds="2"/>
+
+    <path id="derby-classpath">
+      <fileset dir="${rhq.deploy.dir}/db-derby-10.10.2.0-bin/lib/">
+        <include name="derbyclient.jar"/>
+      </fileset>
+    </path>
+
+    <property name="myclasspath" refid="derby-classpath" />
+    <echo message="Classpath is ${myclasspath}" />
+
+    <sql
+      driver="org.apache.derby.jdbc.ClientDriver"
+      url="jdbc:derby://localhost:1527/opp.db;create=true"
+      userid="app"
+      password="app"
+      classpathref="derby-classpath"
+      autocommit="true"
+      src="${rhq.deploy.dir}/installation/sql/tables.sql">
+    </sql>
+
   </target>
 
 </project>
