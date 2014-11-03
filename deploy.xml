@@ -48,5 +48,65 @@
     <os name="Mac OS X" arch="amd64" />
   </condition>
 
+  <rhq:bundle name="Fuse 6.1 FSI Demo" version="1.0" description="Fuse 6.1, Demo code and description">
+    <rhq:input-property
+      name="fuse.install.home"
+      description="Fuse Root Installation Home"
+      required="true"
+      defaultValue="${rhq.deploy.dir}"
+      type="string"/>
+
+    <rhq:deployment-unit name="Fuse 6.1" manageRootDir="false" preinstallTarget="chk_platform" postinstallTarget="install_fuse">
+      <rhq:archive name="software/jboss-fuse-full-6.1.0.redhat-379.zip">
+      </rhq:archive>
+    </rhq:deployment-unit>
+
+  </rhq:bundle>
+
+  <target name="main">
+    <echo message="Entered Main"/>
+  </target>
+
+  <target name="chk_platform">
+    <property name="preinstallTargetExecuted" value="true"/>
+    <echo message="Verifying Platform for ${os.name} and ${os.arch} chipset...." />
+    <echo message="Your operating system is ${os.name}"/>
+    <echo message="Your chipset is ${os.arch}"/>
+    <echo message="Your Fuse installation directory is ${fuse.install.home}"/>
+
+    <fail message="Operating system and chipset property in deploy.xml under property=verified_platform must be ${os.name} and ${os.arch}">
+      <condition>
+        <not>
+          <isset property="verified_platform"/>
+        </not>
+      </condition>
+    </fail>
+  </target>
+
+
+  <target name="install_fuse">
+    <property name="postinstallTargetExecuted" value="true"/>
+
+    <if>
+      <equals arg1="${isOnLinux}" arg2="true" />
+    <then>
+      <echo message="Changing permissions on ${rhq.deploy.dir}/jboss-fuse-6.1.0-redhat-379/bin for fuse, start, stop, status to 775" />
+      <exec dir="${rhq.deploy.dir}/jboss-fuse-6.1.0-redhat-379/bin" executable="/bin/chmod">
+        <arg value="775"/>
+        <arg value="fuse"/>
+      </exec>
+      <exec dir="${rhq.deploy.dir}/jboss-fuse-6.1.0-redhat-379/bin" executable="/bin/chmod">
+        <arg value="775"/>
+        <arg value="start"/>
+      </exec>
+      <exec dir="${rhq.deploy.dir}/jboss-fuse-6.1.0-redhat-379/bin" executable="/bin/chmod">
+        <arg value="775"/>
+        <arg value="stop"/>
+      </exec>
+      <exec dir="${rhq.deploy.dir}/jboss-fuse-6.1.0-redhat-379/bin" executable="/bin/chmod">
+        <arg value="775"/>
+        <arg value="status"/>
+      </exec>
+  </target>
 
 </project>
