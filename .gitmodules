@@ -1,0 +1,3 @@
+[submodule "code/jboss-fuse-fsi-demo"]
+	path = code/jboss-fuse-fsi-demo
+	url = https://github.com/bashburn/jboss-fuse-fsi-demo.git
