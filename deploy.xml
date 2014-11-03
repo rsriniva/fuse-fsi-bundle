@@ -44,8 +44,11 @@
   </condition>
 
   <condition property="verified_platform">
-    <os name="Linux" arch="amd64" />
-    <os name="Mac OS X" arch="amd64" />
+    <or>
+      <os name="Linux" arch="amd64" />
+      <os name="Mac OS X" arch="amd64" />
+      <os name="Mac OS X" arch="x86_64" />
+    </or>
   </condition>
 
   <rhq:bundle name="Fuse 6.1 FSI Demo" version="1.0" description="Fuse 6.1, Demo code and description">
@@ -89,24 +92,26 @@
 
     <if>
       <equals arg1="${isOnLinux}" arg2="true" />
-    <then>
-      <echo message="Changing permissions on ${rhq.deploy.dir}/jboss-fuse-6.1.0-redhat-379/bin for fuse, start, stop, status to 775" />
-      <exec dir="${rhq.deploy.dir}/jboss-fuse-6.1.0-redhat-379/bin" executable="/bin/chmod">
-        <arg value="775"/>
-        <arg value="fuse"/>
-      </exec>
-      <exec dir="${rhq.deploy.dir}/jboss-fuse-6.1.0-redhat-379/bin" executable="/bin/chmod">
-        <arg value="775"/>
-        <arg value="start"/>
-      </exec>
-      <exec dir="${rhq.deploy.dir}/jboss-fuse-6.1.0-redhat-379/bin" executable="/bin/chmod">
-        <arg value="775"/>
-        <arg value="stop"/>
-      </exec>
-      <exec dir="${rhq.deploy.dir}/jboss-fuse-6.1.0-redhat-379/bin" executable="/bin/chmod">
-        <arg value="775"/>
-        <arg value="status"/>
-      </exec>
+      <then>
+        <echo message="Changing permissions on ${rhq.deploy.dir}/jboss-fuse-6.1.0-redhat-379/bin for fuse, start, stop, status to 775" />
+        <exec dir="${rhq.deploy.dir}/jboss-fuse-6.1.0.redhat-379/bin" executable="/bin/chmod">
+          <arg value="775"/>
+          <arg value="fuse"/>
+        </exec>
+        <exec dir="${rhq.deploy.dir}/jboss-fuse-6.1.0.redhat-379/bin" executable="/bin/chmod">
+          <arg value="775"/>
+          <arg value="start"/>
+        </exec>
+        <exec dir="${rhq.deploy.dir}/jboss-fuse-6.1.0.redhat-379/bin" executable="/bin/chmod">
+          <arg value="775"/>
+          <arg value="stop"/>
+        </exec>
+        <exec dir="${rhq.deploy.dir}/jboss-fuse-6.1.0.redhat-379/bin" executable="/bin/chmod">
+          <arg value="775"/>
+          <arg value="status"/>
+        </exec>
+      </then>
+    </if>
   </target>
 
 </project>
