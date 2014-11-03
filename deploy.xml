@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<project name="fsi-fuse-demo" default="main" xmlns:rhq="antlib:org.rhq.bundle">
+  <taskdef resource="net/sf/antcontrib/antlib.xml">
+    <classpath>
+      <pathelement location="installation/lib/ant-contrib.jar" />
+    </classpath>
+  </taskdef>
+
+  <condition property="isOnLinux">
+    <os family="unix"/>
+  </condition>
+
+  <condition property="isOnWindows">
+    <os family="windows" />
+  </condition>
+
+  <condition property="isOnMac">
+    <os family="mac" />
+  </condition>
+
+  <condition property="is64">
+    <or>
+      <os arch="x86_64" />
+      <os arch="amd64" />
+    </or>
+  </condition>
+
+  <condition property="id32">
+    <not>
+      <isset property="is64" />
+    </not>
+  </condition>
+
+  <condition property="isX86">
+    <or>
+      <os arch="x86" />
+      <os arch="i386" />
+      <os arch="i486" />
+      <os arch="i686" />
+      <os arch="x86_64" />
+      <os arch="amd64" />
+    </or>
+  </condition>
+
+  <condition property="verified_platform">
+    <os name="Linux" arch="amd64" />
+    <os name="Mac OS X" arch="amd64" />
+  </condition>
+
+
+</project>
