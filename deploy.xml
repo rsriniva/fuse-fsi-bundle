@@ -65,8 +65,16 @@
       <rhq:archive name="software/db-derby-10.10.2.0-bin.zip">
       </rhq:archive>
       <rhq:archive name="installation.zip">
+        <rhq:replace>
+          <rhq:fileset includes="**/*.sh"/>
+        </rhq:replace>
       </rhq:archive>
       <rhq:archive name="code.zip">
+        <rhq:replace>
+          <rhq:fileset includes="code/settings.xml"/>
+        </rhq:replace>
+      </rhq:archive>
+      <rhq:archive name="m2-repo.zip">
       </rhq:archive>
     </rhq:deployment-unit>
 
@@ -149,6 +157,14 @@
           <arg value="775"/>
           <arg value="stopNetworkServer"/>
         </exec>
+        <exec dir="${rhq.deploy.dir}/db-derby-10.10.2.0-bin/bin" executable="/bin/chmod">
+          <arg value="775"/>
+          <arg value="ij"/>
+        </exec>
+        <exec dir="${rhq.deploy.dir}/installation/alias" executable="/bin/chmod">
+          <arg value="775"/>
+          <arg value="demoalias.sh"/>
+        </exec>
       </then>
     </if>
 
@@ -202,6 +218,27 @@
       <arg value="${rhq.deploy.dir}/code/settings.xml"/>
       <arg value="fabric8:deploy"/>
     </exec>
+
+
+    <echo message="alias commands for Fuse server(alias=fusedir) and Derby server(alias=derbydir)"/>
+    <echo message="To add these to your environment, enter '${rhq.deploy.dir}/installation/alias/demoalias.sh'"/>
+    <echo message="============================================================================"/>
+    <echo message=""/>
+    <echo message=""/>
+    <echo message="If there were no errors, then the Fuse server will be started and a Fabric created"/>
+    <echo message="You can see the hawt.io console, you can open a brower to http://localhost:8181 and login using admin/admin"/>
+    <echo message="To access the Karaf console, go to the Fuse directory and launch './client -u admin -p admin'"/>
+    <echo message=""/>
+    <echo message=""/>
+    <echo message="To access the database, go to the Derby directory and launch ./ij"/>
+    <echo message="Connect to the database with: 'connect jdbc:derby://localhost:1527/opp.db'"/>
+    <echo message=""/>
+    <echo message=""/>
+    <echo message="To stop the Fuse server, go to the Fuse directory and run ./stop"/>
+    <echo message="To stop the Derby server, go to the Derby directory and run ./stopNetworkServer"/>
+    <echo message=""/>
+    <echo message=""/>
+    <echo message="============================================================================"/>
 
   </target>
 

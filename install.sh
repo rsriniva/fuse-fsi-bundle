@@ -3,6 +3,10 @@
 # rhq-ant input properties:
 # rhq.deploy.dir is the installation directory for Fuse and the necessary projects.
 
+if [ -f /usr/libexec/java_home ]; then
+  export JAVA_HOME=$(/usr/libexec/java_home -v 1.7)
+fi
+
 if [ "x$JAVA_HOME" = "x" ]; then
   echo "Please set your JAVA_HOME environment variable."
   exit 1

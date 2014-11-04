@@ -1,4 +1,6 @@
 <settings>
+  <localRepository>@@rhq.deploy.dir@@/m2-repo</localRepository>
+  <offline>true</offline>
   <servers>
     <server>
       <id>fabric8.upload.repo</id>
