@@ -177,7 +177,7 @@
     </exec>
 
     <!-- Need to wait for the db to start -->
-    <sleep seconds="2"/>
+    <sleep seconds="5"/>
 
     <!-- Derby JDBC Library classpath -->
     <path id="derby-classpath">
