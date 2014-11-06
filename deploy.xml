@@ -60,7 +60,7 @@
       type="string"/>
 
     <rhq:deployment-unit name="Fuse 6.1" manageRootDir="false" preinstallTarget="chk_platform" postinstallTarget="install_fuse">
-      <rhq:archive name="software/jboss-fuse-full-6.1.0.redhat-379.zip">
+      <rhq:archive name="software/jboss-fuse-medium-6.1.0.redhat-379.zip">
       </rhq:archive>
       <rhq:archive name="software/db-derby-10.10.2.0-bin.zip">
       </rhq:archive>
@@ -165,6 +165,14 @@
           <arg value="775"/>
           <arg value="demoalias.sh"/>
         </exec>
+        <exec dir="${rhq.deploy.dir}/installation/bin" executable="/bin/chmod">
+          <arg value="775"/>
+          <arg value="demostart.sh"/>
+        </exec>
+        <exec dir="${rhq.deploy.dir}/installation/bin" executable="/bin/chmod">
+          <arg value="775"/>
+          <arg value="demostop.sh"/>
+        </exec>
       </then>
     </if>
 
@@ -231,7 +239,7 @@
     <echo message=""/>
     <echo message=""/>
     <echo message="To access the database, go to the Derby directory and launch ./ij"/>
-    <echo message="Connect to the database with: 'connect jdbc:derby://localhost:1527/opp.db'"/>
+    <echo message="Connect to the database with: connect 'jdbc:derby://localhost:1527/opp.db'"/>
     <echo message=""/>
     <echo message=""/>
     <echo message="To stop the Fuse server, go to the Fuse directory and run ./stop"/>

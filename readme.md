@@ -7,3 +7,6 @@ In order to build the bundle, you will need to download the installation artifac
 In addition, you will need to download Apache Derby from http://db.apache.org/derby/releases/release-10.10.2.0.cgi and place it in the software directory as well.
 
 ## Configuration Notes
+
+
+`zip -r fsi-fuse-bundle fsi-fuse-bundle -x *.git*` is the command for creating the zip file.
