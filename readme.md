@@ -6,6 +6,14 @@ In order to build the bundle, you will need to download the installation artifac
 
 In addition, you will need to download Apache Derby from http://db.apache.org/derby/releases/release-10.10.2.0.cgi and place it in the software directory as well.
 
+When you clone the project, you will need to either clone using `git clone --recursive http://github.com/bashburn/fsi-fuse-bundle`.
+
+If you have already cloned this repository without the recursive flag, you can do the following:
+```
+git submodule init
+git submodule update
+```
+
 ## Configuration Notes
 
 
