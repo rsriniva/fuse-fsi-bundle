@@ -161,13 +161,13 @@
           <arg value="775"/>
           <arg value="demoalias.sh"/>
         </exec>
-        <exec dir="${rhq.deploy.dir}/installation/bin" executable="/bin/chmod">
+        <exec dir="${rhq.deploy.dir}/installation/run" executable="/bin/chmod">
           <arg value="775"/>
-          <arg value="demostart.sh"/>
+          <arg value="demorun.sh"/>
         </exec>
-        <exec dir="${rhq.deploy.dir}/installation/bin" executable="/bin/chmod">
+        <exec dir="${rhq.deploy.dir}/installation/shutdown" executable="/bin/chmod">
           <arg value="775"/>
-          <arg value="demostop.sh"/>
+          <arg value="demoshutdown.sh"/>
         </exec>
       </then>
     </if>
@@ -238,8 +238,7 @@
     <echo message="Connect to the database with: connect 'jdbc:derby://localhost:1527/opp.db'"/>
     <echo message=""/>
     <echo message=""/>
-    <echo message="To stop the Fuse server, go to the Fuse directory and run ./stop"/>
-    <echo message="To stop the Derby server, go to the Derby directory and run ./stopNetworkServer"/>
+    <echo message="To stop the demo, run '${rhq.deploy.dir}/installation/shutdown/demoshutdown.sh'"/>
     <echo message=""/>
     <echo message=""/>
     <echo message="============================================================================"/>
