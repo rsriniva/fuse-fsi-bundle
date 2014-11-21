@@ -67,11 +67,7 @@
       <rhq:archive name="installation.zip">
         <rhq:replace>
           <rhq:fileset includes="**/*.sh"/>
-        </rhq:replace>
-      </rhq:archive>
-      <rhq:archive name="code.zip">
-        <rhq:replace>
-          <rhq:fileset includes="code/settings.xml"/>
+          <rhq:fileset includes="installation/projects/settings.xml"/>
         </rhq:replace>
       </rhq:archive>
       <rhq:archive name="m2-repo.zip">
@@ -221,9 +217,9 @@
       <arg value="fabric:create --clean --wait-for-provisioning"/>
     </exec>
 
-    <exec dir="${rhq.deploy.dir}/code/jboss-fuse-fsi-demo" executable="mvn">
+    <exec dir="${rhq.deploy.dir}/installation/projects/jboss-fuse-fsi-demo" executable="mvn">
       <arg value="-gs"/>
-      <arg value="${rhq.deploy.dir}/code/settings.xml"/>
+      <arg value="${rhq.deploy.dir}/installation/projects/settings.xml"/>
       <arg value="fabric8:deploy"/>
     </exec>
 
