@@ -245,10 +245,18 @@
       <arg value="fabric8:deploy"/>
     </exec>
 
-
+    <echo message=""/>
+    <echo message=""/>
+    <echo message="Demo Startup/Shutdown"/>
+    <echo message="============================================================================"/>
     <echo message="alias commands for Fuse server(alias=fusedir) and Derby server(alias=derbydir)"/>
     <echo message="To add these to your environment, enter '${rhq.deploy.dir}/installation/alias/demoalias.sh'"/>
-    <echo message="============================================================================"/>
+    <echo message=""/>
+    <echo message=""/>
+    <echo message="For starting the demo, cd to ${rhq.deploy.dir}/installation/run, and run demorun.sh"/>
+    <echo message=""/>
+    <echo message=""/>
+    <echo message="For stopping the demo, cd to ${rhq.deploy.dir}/installation/shutdown, and run demoshutdown.sh"/>
     <echo message=""/>
     <echo message=""/>
     <echo message="If there were no errors, then the Fuse server will be started and a Fabric created"/>
@@ -258,9 +266,6 @@
     <echo message=""/>
     <echo message="To access the database, go to the Derby directory and launch ./ij"/>
     <echo message="Connect to the database with: connect 'jdbc:derby://localhost:1527/opp.db'"/>
-    <echo message=""/>
-    <echo message=""/>
-    <echo message="To stop the demo, run '${rhq.deploy.dir}/installation/shutdown/demoshutdown.sh'"/>
     <echo message=""/>
     <echo message=""/>
     <echo message="============================================================================"/>
