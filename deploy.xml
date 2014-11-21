@@ -51,6 +51,8 @@
     </or>
   </condition>
 
+  <property environment="env" />
+
   <rhq:bundle name="Fuse 6.1 FSI Demo" version="1.1" description="Fuse 6.1, Demo code and description">
     <rhq:input-property
       name="fuse.install.home"
@@ -99,6 +101,26 @@
 
   <target name="install_fuse">
     <property name="postinstallTargetExecuted" value="true"/>
+
+    <condition property="mvn.path" value="${env.Path}" else="${env.PATH}">
+      <os family="windows"/>
+    </condition>
+
+    <if>
+      <equals arg1="${isOnLinux}" arg2="true" />
+      <then>
+        <echo message="Verifying Maven command mvn is on your PATH..."/>
+        <condition property="mvn.file.present">
+        <and>
+        <available property="mvn.present"
+          file="mvn"
+          filepath="${mvn.path}"
+          type="file"/>
+        </and>
+        </condition>
+        <fail message="mvn is not on your system path and not present" unless="mvn.file.present"/>
+      </then>
+    </if>
 
     <copy file="${rhq.deploy.dir}/installation/config/fuse/users.properties"
       tofile="${rhq.deploy.dir}/jboss-fuse-6.1.0.redhat-379/etc/users.properties"
