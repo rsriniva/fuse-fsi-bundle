@@ -72,8 +72,6 @@
           <rhq:fileset includes="installation/projects/settings.xml"/>
         </rhq:replace>
       </rhq:archive>
-      <rhq:archive name="m2-repo.zip">
-      </rhq:archive>
     </rhq:deployment-unit>
 
   </rhq:bundle>
@@ -240,7 +238,7 @@
     </exec>
 
     <exec dir="${rhq.deploy.dir}/installation/projects/jboss-fuse-fsi-demo" executable="mvn">
-      <arg value="-gs"/>
+      <arg value="-s"/>
       <arg value="${rhq.deploy.dir}/installation/projects/settings.xml"/>
       <arg value="fabric8:deploy"/>
     </exec>
