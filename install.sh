@@ -19,4 +19,4 @@ fi
 
 export PATH="`pwd`/installer/bin:$JAVA_HOME/bin:$PATH"
 /bin/chmod 775 installer/bin/rhq-ant
-rhq-ant -Drhq.deploy.dir=/tmp/jboss-demos/fuse-fsi-demo -Drhq.deploy.clean=false
+rhq-ant -Drhq.deploy.dir=/tmp/jboss-demos/fuse-fsi-demo -Drhq.deploy.clean=false -Drun.maven.builds=y

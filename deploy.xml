@@ -61,6 +61,13 @@
       defaultValue="${rhq.deploy.dir}"
       type="string"/>
 
+    <rhq:input-property
+            name="run.maven.builds"
+            description="Option to run the maven builds at the very end"
+            required="true"
+            defaultValue="n"
+            type="string"/>
+
     <rhq:deployment-unit name="Fuse 6.1" manageRootDir="false" preinstallTarget="chk_platform" postinstallTarget="install_fuse">
       <rhq:archive name="software/jboss-fuse-medium-6.1.0.redhat-379.zip">
       </rhq:archive>
@@ -200,6 +207,9 @@
       </then>
     </if>
 
+    <if>
+      <equals arg1="${run.maven.builds}" arg2="y" casesensitive="false"/>
+    <then>
     <!-- Start up Derby database -->
     <exec dir="${rhq.deploy.dir}/db-derby-10.10.2.0-bin/bin" executable="./startNetworkServer" spawn="true">
       <arg value="-h"/>
@@ -253,6 +263,9 @@
 
     <exec dir="${rhq.deploy.dir}/installation/shutdown" executable="./demoshutdown.sh">
     </exec>
+
+  </then>
+</if>
 
     <echo message=""/>
     <echo message=""/>
