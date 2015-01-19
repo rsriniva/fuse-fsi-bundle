@@ -126,6 +126,14 @@
       tofile="${rhq.deploy.dir}/jboss-fuse-6.1.0.redhat-379/etc/users.properties"
       overwrite="true" />
 
+    <copy file="${rhq.deploy.dir}/installation/run/demorun.sh"
+      tofile="${rhq.deploy.dir}/jboss-fuse-6.1.0.redhat-379/bin/demorun.sh"
+      overwrite="true" />
+
+    <copy file="${rhq.deploy.dir}/installation/shutdown/demoshutdown.sh"
+      tofile="${rhq.deploy.dir}/jboss-fuse-6.1.0.redhat-379/bin/demoshutdown.sh"
+      overwrite="true" />
+
     <!-- Setting our executables to be executable -->
     <if>
       <equals arg1="${isOnLinux}" arg2="true" />
@@ -167,6 +175,14 @@
           <arg value="775"/>
           <arg value="admin"/>
         </exec>
+        <exec dir="${rhq.deploy.dir}/jboss-fuse-6.1.0.redhat-379/bin" executable="/bin/chmod">
+          <arg value="775"/>
+          <arg value="demorun.sh"/>
+        </exec>
+        <exec dir="${rhq.deploy.dir}/jboss-fuse-6.1.0.redhat-379/bin" executable="/bin/chmod">
+          <arg value="775"/>
+          <arg value="demoshutdown.sh"/>
+        </exec>
         <exec dir="${rhq.deploy.dir}/db-derby-10.10.2.0-bin/bin" executable="/bin/chmod">
           <arg value="775"/>
           <arg value="startNetworkServer"/>
@@ -182,14 +198,6 @@
         <exec dir="${rhq.deploy.dir}/installation/alias" executable="/bin/chmod">
           <arg value="775"/>
           <arg value="demoalias.sh"/>
-        </exec>
-        <exec dir="${rhq.deploy.dir}/installation/run" executable="/bin/chmod">
-          <arg value="775"/>
-          <arg value="demorun.sh"/>
-        </exec>
-        <exec dir="${rhq.deploy.dir}/installation/shutdown" executable="/bin/chmod">
-          <arg value="775"/>
-          <arg value="demoshutdown.sh"/>
         </exec>
       </then>
     </if>

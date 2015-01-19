@@ -13,9 +13,8 @@ if [ "x$JAVA_HOME" = "x" ]; then
 fi
 
 if [ ! -f installation.zip ]; then
-  cd installation_build
-  zip -r ../installation.zip installation
-  cd ..
+  echo "Please build the installation.zip prior to running the install"
+  exit 1
 fi
 
 export PATH="`pwd`/installer/bin:$JAVA_HOME/bin:$PATH"
