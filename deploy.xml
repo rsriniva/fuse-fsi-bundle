@@ -53,7 +53,7 @@
 
   <property environment="env" />
 
-  <rhq:bundle name="Fuse 6.1 FSI Demo" version="1.1" description="Fuse 6.1, Demo code and description">
+  <rhq:bundle name="Fuse 6.1 FSI Demo" version="1.2" description="Fuse 6.1, Demo code and description">
     <rhq:input-property
       name="fuse.install.home"
       description="Fuse Root Installation Home"
@@ -71,8 +71,6 @@
           <rhq:fileset includes="**/*.sh"/>
           <rhq:fileset includes="installation/projects/settings.xml"/>
         </rhq:replace>
-      </rhq:archive>
-      <rhq:archive name="m2-repo.zip">
       </rhq:archive>
     </rhq:deployment-unit>
 
@@ -248,7 +246,7 @@
     </exec>
 
     <exec dir="${rhq.deploy.dir}/installation/projects/jboss-fuse-fsi-demo" executable="mvn">
-      <arg value="-gs"/>
+      <arg value="-s"/>
       <arg value="${rhq.deploy.dir}/installation/projects/settings.xml"/>
       <arg value="fabric8:deploy"/>
     </exec>
