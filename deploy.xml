@@ -219,7 +219,7 @@
     </exec>
 
     <!-- Need to wait for the db to start -->
-    <sleep seconds="5"/>
+    <sleep seconds="30"/>
 
     <!-- Derby JDBC Library classpath -->
     <path id="derby-classpath">
@@ -261,7 +261,7 @@
       <arg value="fabric8:deploy"/>
     </exec>
 
-    <exec dir="${rhq.deploy.dir}/installation/shutdown" executable="./demoshutdown.sh">
+    <exec dir="${rhq.deploy.dir}/jboss-fuse-6.1.0.redhat-379/bin" executable="./demoshutdown.sh">
     </exec>
 
   </then>
