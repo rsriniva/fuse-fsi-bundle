@@ -17,4 +17,4 @@ git submodule update
 ## Configuration Notes
 
 
-`zip -r fsi-fuse-bundle fsi-fuse-bundle -x *.git*` is the command for creating the zip file.
+`zip -r fuse-fsi-bundle fuse-fsi-bundle -x *.git*` is the command for creating the zip file.
