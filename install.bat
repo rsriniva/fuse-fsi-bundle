@@ -18,6 +18,6 @@ set PATH=%CD%\installer\bin;%JAVA_HOME%\bin;%PATH%;
 echo "==================="
 echo %PATH%
 echo "==================="
-rhq-ant -Drhq.deploy.dir=\tmp\jboss-demos\fuse-fsi-demo -Drhq.deploy.clean="false"
+rhq-ant -Drhq.deploy.dir=\tmp\jboss-demos\fuse-fsi-demo -Drhq.deploy.clean="false" -Drun.maven.builds=y
 
 :END_OF_START
