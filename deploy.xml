@@ -277,7 +277,7 @@
     <echo message="For stopping the demo, cd to ${rhq.deploy.dir}/installation/shutdown, and run demoshutdown.sh"/>
     <echo message=""/>
     <echo message=""/>
-    <echo message="alias commands for Fuse server(alias=fusedir) and Derby server(alias=derbydir)"/>
+    <echo message="alias commands for Fuse server(alias=fsifusedir) and Derby server(alias=fsiderbydir)"/>
     <echo message="To add these to your environment, enter '${rhq.deploy.dir}/installation/alias/demoalias.sh'"/>
     <echo message=""/>
     <echo message=""/>
